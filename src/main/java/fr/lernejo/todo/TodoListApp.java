@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("fr.lernejo.meteo")
+@ComponentScan({"fr.lernejo.meteo", "fr.lernejo.todo"})
 public class TodoListApp {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(TodoListApp.class, args);
     }
 }

@@ -20,6 +20,7 @@ public class MeteoService {
             logger.warn("Position invalide: " + position);
             throw new InvalidPositionException(position);
         }
+        logger.info("Role de l'utilisateur connecté: contributor");
         TemperatureResult temperatureResult = client
             .get(position.x(), position.y());
         return temperatureResult.temperaturesOverLastHour().get(0);
