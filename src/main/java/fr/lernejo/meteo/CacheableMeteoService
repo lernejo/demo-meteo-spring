@@ -1,0 +1,27 @@
+package fr.lernejo.meteo;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class CacheableMeteoService implements MeteoService {
+
+    private final MeteoService delegate;
+    private final int maxItems;
+
+    private final Map<String, Double> cache = new LinkedHashMap<>() {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, Double> eldest) {
+            return size() > maxItems;
+        }
+    };
+
+    public CacheableMeteoService(MeteoService delegate, int maxItems) {
+        this.delegate = delegate;
+        this.maxItems = maxItems;
+    }
+
+    @Override
+    public double getTemperature(String country) {
+        return cache.computeIfAbsent(country, c -> delegate.getTemperature(c));
+    }
+}
